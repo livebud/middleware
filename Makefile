@@ -7,8 +7,7 @@ test:
 
 release: test
 	@ go mod tidy
-	@ gh --version > /dev/null || (echo "The 'gh' command must be in your path to release" && false)
-	@ test -z "`git status --porcelain | grep -vE 'M (History\.md)'`" || (echo "uncommitted changes detected." && false)
+	@ test -z "`git status --porcelain | grep -vE 'History\.md'`" || (echo "uncommitted changes detected." && false)
 	@ git commit -am "Release v$(VERSION)"
 	@ git tag "v$(VERSION)"
 	@ git push origin main "v$(VERSION)"
